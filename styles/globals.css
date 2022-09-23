@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    body{
+        @apply bg-[#141414]
+    }
+
+    header{
+        @apply fixed top-0 z-50 w-full flex items-center justify-between px-4 py-2 transition-all lg:px-8 lg:py-4
+    }
+}
+
+@layer components{
+    .headerlinks{
+        @apply cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-300 hover:text-[#b3b3b3]
+    }
+}
