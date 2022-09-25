@@ -2,6 +2,7 @@
 import Head from 'next/head'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
+import Row from '../components/Row'
 import { Movie } from '../typing'
 import requests from '../utils/requests'
 
@@ -28,12 +29,17 @@ const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovie
       {/* Header Section */}
       <Header/>
       {/* Main section */}
-      <main>
+      <main className='relative pl-6 pb-24 lg:space-y-24 lg:pl-12'>
         <Banner netflixOrginals = {netflixOrginals} />
-        {/* Banners */}
-        {/* Banners */}
-        {/* Banners */}
-        {/* Banners */}
+        <section>
+          <Row tittle="Trending Now " movies={trendingNow} />
+          <Row tittle="Top Rated " movies={topRated} />
+          <Row tittle="Action Thrillers " movies={actionMovies} />
+          <Row tittle="Comedies " movies={comedyMovies} />
+          <Row tittle="Scary Movies " movies={horrerMovies} />
+          <Row tittle="Romantic Movies " movies={romanceMovies} />
+          <Row tittle="Documentaries " movies={documentaries} />
+        </section>
       </main>
       {/* Modal section */}
 

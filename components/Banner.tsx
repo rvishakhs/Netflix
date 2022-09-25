@@ -31,18 +31,21 @@ useEffect(() => {
                 objectFit='cover'
             />
         </div>
-        <h1 className="text-2xl font-bold md:text-4xl lg:text-7xl">
+        <h1 className="text-2xl pt-16 font-bold md:text-4xl lg:text-7xl py-1">
             {movie?.title || movie?.name || movie?.original_name}
         </h1>
 
         <p className='max-w-xs text-xs md:text-lg lg:max-w-2xl lg:text-2xl'>
             {movie?.overview}
         </p>
-        <div>
+
+        <div className='flex items-center space-x-2'>
             <button className='bannerbtn bg-white text-black'><BsFillPlayFill className='h-4 w-4 text-black md:h-7 md:w-7' /> Play</button>
-            <button className='bannerbtn bg-[gray]/70'>  More info <HiOutlineInformationCircle className='h-5 w-5 md:h-8 md:w-8'/> </button>
+            <button className='bannerbtn bg-[gray]/70'>  More info <HiOutlineInformationCircle className='h-5 w-5 md:h-7 md:w-7'/> </button>
         </div>
+
     </div>
+
   )
 }
 
