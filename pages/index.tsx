@@ -31,7 +31,7 @@ const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovie
       {/* Main section */}
       <main className='relative pl-6 pb-24 lg:space-y-24 lg:pl-12'>
         <Banner netflixOrginals = {netflixOrginals} />
-        <section>
+        <section className='md:space-y-20'>
           <Row tittle="Trending Now " movies={trendingNow} />
           <Row tittle="Top Rated " movies={topRated} />
           <Row tittle="Action Thrillers " movies={actionMovies} />
