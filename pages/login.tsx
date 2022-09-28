@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
+import useAuth from '../hooks/UseAuth';
 
 type Inputs = {
     email: string,
@@ -10,9 +11,17 @@ type Inputs = {
 
 function login() {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+    const [login, setLogin ] =  useState(false)
+    const {signIn, signUp} = useAuth()
 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const onSubmit: SubmitHandler<Inputs> = async ({email, password}) => {
+        if(login){
+            await signIn(email, password)
+        } else {
+            await signUp(email, password)
+        }
+    } 
 
   return (
     <div className='relative flex h-screen w-screen flex-col bg-black md: items-center md:justify-center md:bg-transparent'>
