@@ -58,10 +58,10 @@ function login() {
                 </label>
             </div>
 
-          <button className='w-full rounded bg-[#e50914] py-2 font-semibold'>Sign in </button>
+          <button className='w-full rounded bg-[#e50914] py-2 font-semibold' onClick={() =>setLogin(true)}>Sign in </button>
             <div className='flex space-x-1'>
                 <h5 className='text-[gray] font-medium'>{`New to Netflix?`}</h5> 
-                <button className='text-white hover:underline'>
+                <button className='text-white hover:underline'onClick={() =>setLogin(false)}>
                      Sign up now
                 </button>
             </div>

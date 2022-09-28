@@ -62,11 +62,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           router.push("/")
           setLoading(false);
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
-        }).finally((() => setLoading(false)));
+        .catch((error) => alert(error.message))
+        .finally(() => setLoading(false))
     }
 
     const signIn = async (email: string, password : string ) => {
@@ -77,11 +74,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           router.push("/")
           setLoading(false);
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
-        }).finally((() => setLoading(false)));
+        .catch((error) => alert(error.message))
+        .finally(() => setLoading(false))
     }
     
     const logout = async() => {
@@ -111,3 +105,4 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 export default function useAuth() {
     return useContext(AuthContext)
   }
+
