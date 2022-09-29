@@ -31,19 +31,7 @@ function Row({tittle, movies}:props) {
         }
       }
 
-    //   console.log(rowRef.current!.scrollLeft, rowRef.current!.clientWidth);
-      
-    // const handleClick = (direction : string) => {
-    //     setIsMoved(true)
 
-    //     if(rowRef.current){
-    //         const {scrollLeft, clientWidth} = rowRef.current
-
-    //         const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth
-
-    //         rowRef.current.scrollTo({left: scrollTo, behavior: "smooth"})
-    //     }        
-    // } 
 
 
   return (  
