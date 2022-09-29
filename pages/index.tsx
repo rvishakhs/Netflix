@@ -5,6 +5,13 @@ import Header from '../components/Header'
 import Row from '../components/Row'
 import { Movie } from '../typing'
 import requests from '../utils/requests'
+import {
+  useRecoilValue,
+} from 'recoil';
+import { modalState } from '../atom/modalatom'
+import Modal from '../components/Modal'
+
+
 
 interface props {
     netflixOrginals : Movie[]
@@ -18,6 +25,8 @@ interface props {
 }
 
 const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovies, horrerMovies, romanceMovies, documentaries}: props) => {
+
+  const modalstate = useRecoilValue(modalState)
 
 
   return (
@@ -42,6 +51,8 @@ const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovie
         </section>
       </main>
       {/* Modal section */}
+
+      {modalstate && <Modal />}
 
     </div>
   )

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { BsSearch, BsBellFill } from "react-icons/bs";
-import useAuth from '../hooks/UseAuth';
+import useAuth from '../hooks/useAuth';
 
 function Header() {
 
