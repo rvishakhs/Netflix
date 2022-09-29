@@ -4,13 +4,15 @@ import {
     useRecoilState,
   } from 'recoil';
   import { modalState, movieState } from '../atom/modalatom'
-  import { GrFormClose } from "react-icons/gr";
+import { MdClose } from "react-icons/md";
 import { log } from 'console';
 import { Element, Genre } from '../typing';
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsHandThumbsUp } from "react-icons/bs";
+import { GoMute } from "react-icons/go";
+import { BsFillVolumeUpFill } from "react-icons/bs";
 
 
 
@@ -68,7 +70,7 @@ function Modal() {
                 className='modalbtn absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818] hover:bg-[#181818] hover:scale-105'
                 onClick={handleclick}
             >
-                    <GrFormClose className="h-8 w-8 text-white " />
+                    <MdClose className="h-8 w-8 text-white " />
             </button>
             <div className='relative pt-[56.25%]'>
                 <ReactPlayer 
@@ -92,12 +94,42 @@ function Modal() {
                             <BsHandThumbsUp className='h-6 w-6'/>
                         </button>
                     </div>
-                    <div>
-                        <button className='modalbtn'>
-                            <BsHandThumbsUp className='h-6 w-6'/>
-                        </button>
+                    <div  onClick={() => {
+                        setMuted(!muted)
+                    }}>
+                    {  muted ?   <button className='modalbtn'>
+                            <GoMute className='h-6 w-6'/>
+                        </button> :  <button className='modalbtn'>
+                            <BsFillVolumeUpFill className='h-6 w-6'/>
+                        </button> }
                     </div>
             </div>
+            </div>
+
+            <div className='flex space-x-16 rounded-b-md bg-[#181818] px-10 py-6'>
+                <div className='space-y-4  text-lg'>
+                    <div className="flex items-center space-x-3 text-sm ">
+                        <p className='font-semibold text-green-400'>
+                            {movie!.vote_average * 10}% Match 
+                        </p>
+                        <p className='font-light'>
+                            {movie?.release_date || movie?.first_air_date}
+                        </p>
+                        <div className='flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs '>
+                            HD
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-x-10 gap-y-4 font-light md:flex-row'>
+                        <p className='w-4git/5' >{movie?.overview}</p>
+                        <div className='flex flex-col space-y-3 text-sm'>
+                            <div >
+                                <span className='text-[gray]'>Genres: </span>
+                                {genres.map((genres) => genres.name).join (', ')}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
             
