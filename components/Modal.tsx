@@ -72,7 +72,7 @@ function Modal() {
             >
                     <MdClose className="h-8 w-8 text-white " />
             </button>
-            <div className='relative pt-[56.25%]'>
+            <div className='relative pt-[46.25%]'>
                 <ReactPlayer 
                     url={`https://www.youtube.com/watch?v=${trailer}`} 
                     width="100%"
@@ -120,12 +120,23 @@ function Modal() {
                         </div>
                     </div>
                     <div className='flex flex-col gap-x-10 gap-y-4 font-light md:flex-row'>
-                        <p className='w-4git/5' >{movie?.overview}</p>
+                        <p className='w-4/5' >{movie?.overview}</p>
                         <div className='flex flex-col space-y-3 text-sm'>
                             <div >
                                 <span className='text-[gray]'>Genres: </span>
                                 {genres.map((genres) => genres.name).join (', ')}
                             </div>
+
+                            <div >
+                                <span className='text-[gray]'>Orginal language: </span>
+                                {movie?.original_language}
+                            </div>
+
+                            <div >
+                                <span className='text-[gray]'>Total Votes: </span>
+                                {movie?.vote_count}
+                            </div>
+
 
                         </div>
                     </div>
