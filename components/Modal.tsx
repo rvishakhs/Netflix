@@ -72,7 +72,7 @@ function Modal() {
             >
                     <MdClose className="h-8 w-8 text-white " />
             </button>
-            <div className='relative pt-[46.25%]'>
+            <div className='relative pt-[60.25%] md:pt-[56.25%] lg:pt-[40.25%]'>
                 <ReactPlayer 
                     url={`https://www.youtube.com/watch?v=${trailer}`} 
                     width="100%"
@@ -83,24 +83,24 @@ function Modal() {
                 />
                 <div className='absolute bottom-10 flex w-full items-center justify-between px-10'>
                     <div className='flex space-x-2'>
-                        <button className='flex items-center gap-x-2 rounded bg-white px-8 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]'>
-                            <FaPlay className='h-5 w-5 text-black' />
+                        <button className='flex items-center gap-x-2 rounded bg-white px-4 py-1 text-sm md:px-8 md:py-2 md:text-xl font-bold text-black transition hover:bg-[#e6e6e6]'>
+                            <FaPlay className='h-3 w-3 md:h-5 md:w-5 text-black' />
                                 Play
                         </button>
                         <button className='modalbtn'>
-                            <AiOutlinePlus className='h-6 w-6'/>
+                            <AiOutlinePlus className=' h-4 w-4 md:h-6 md:w-6'/>
                         </button>
                         <button className='modalbtn'>
-                            <BsHandThumbsUp className='h-6 w-6'/>
+                            <BsHandThumbsUp className='h-[14px] w-[14px]  md:h-6 md:w-6'/>
                         </button>
                     </div>
                     <div  onClick={() => {
                         setMuted(!muted)
                     }}>
                     {  muted ?   <button className='modalbtn'>
-                            <GoMute className='h-6 w-6'/>
+                            <GoMute className='h-4 w-4 md:h-6 md:w-6'/>
                         </button> :  <button className='modalbtn'>
-                            <BsFillVolumeUpFill className='h-6 w-6'/>
+                            <BsFillVolumeUpFill className='h-4 w-4 md:h-6 md:w-6'/>
                         </button> }
                     </div>
             </div>
@@ -120,7 +120,7 @@ function Modal() {
                         </div>
                     </div>
                     <div className='flex flex-col gap-x-10 gap-y-4 font-light md:flex-row'>
-                        <p className='w-4/5' >{movie?.overview}</p>
+                        <p className='w-4/5 trancate line-clamp-3 md:line-clamp-5 text-clip' >{movie?.overview}</p>
                         <div className='flex flex-col space-y-3 text-sm'>
                             <div >
                                 <span className='text-[gray]'>Genres: </span>
