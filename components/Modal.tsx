@@ -127,7 +127,7 @@ function Modal() {
                                 {genres.map((genres) => genres.name).join (', ')}
                             </div>
 
-                            <div className='font-semibold' >
+                            <div className='font-semibold text-white' >
                                 <span className='text-[gray]'>Orginal language: </span>
                                 {movie?.original_language}
                             </div>
