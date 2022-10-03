@@ -10,6 +10,8 @@ import {
 } from 'recoil';
 import { modalState } from '../atom/modalatom'
 import Modal from '../components/Modal'
+import useAuth from '../hooks/useAuth';
+import Plans from '../components/Plans'
 
 
 
@@ -27,7 +29,14 @@ interface props {
 const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovies, horrerMovies, romanceMovies, documentaries}: props) => {
 
   const modalstate = useRecoilValue(modalState)
+  const subscribed = false
+  const {loading} = useAuth()
 
+  if (loading || subscribed === null ) return null 
+
+  if (!subscribed) {
+    return <Plans />
+  }
 
   return (
     <div className="related h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">

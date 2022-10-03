@@ -26,9 +26,9 @@ function login() {
   return (
     <div className='relative flex h-screen w-screen flex-col bg-black md: items-center md:justify-center md:bg-transparent'>
         <Head>
-        <title>Netflix </title>
-        <link rel="icon" href="https://cdn.iconscout.com/icon/free/png-256/netflix-3521600-2945044.png" />
-      </Head>
+          <title>Netflix </title>
+          <link rel="icon" href="https://cdn.iconscout.com/icon/free/png-256/netflix-3521600-2945044.png" />
+        </Head>
 
       <Image
         src="https://rb.gy/p2hphi"
