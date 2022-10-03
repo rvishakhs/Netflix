@@ -33,7 +33,7 @@ function Plans() {
             </Link>
         </header>
 
-        <main className='pt-32 pl-4'>
+        <main className='max-w-5xl px-5 pt-28 pb-12 transition-all md:px-10 '>
             <h1 className='mb-3 md:text-3xl md:font-medium text-xl font-normal'>Choose the plan that's right for you </h1>
             <ul>
                 <li className='flex items-center gap-x-2 text-lg'>
@@ -49,9 +49,15 @@ function Plans() {
                     Cancel your plan anytime 
                 </li>
             </ul>
+            <div className='mt-4 flex flex-col space-y-4'>
+                <div className='flex w-full items-center justify-center self-end md:w-3/5'>
+                    <div className='planbox'>Standard</div>
+                    <div className='planbox'>Premium</div>
+                    <div className='planbox'>Ultra</div>
+                </div>
+            </div>
+
         </main>
-
-
     </div>
   )
 }

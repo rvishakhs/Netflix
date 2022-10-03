@@ -9,6 +9,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.7",
+    "@stripe/firestore-stripe-payments": "^0.0.6",
     "@tailwindcss/line-clamp": "^0.4.2",
     "firebase": "^9.10.0",
     "next": "latest",
