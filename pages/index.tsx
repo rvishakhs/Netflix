@@ -16,6 +16,7 @@ import { getProducts, Product } from '@stripe/firestore-stripe-payments'
 import payments from '../lib/stripe'
 import { useEffect, useState } from 'react'
 import login from './login'
+import useSubscription from '../hooks/useSubscription'
 
 
 
@@ -46,8 +47,8 @@ const Home = ({
     
   console.log(products)  
   const modalstate = useRecoilValue(modalState)
-  const subscribed = false
-  const {loading} = useAuth()
+  const {loading, user} = useAuth()
+  const subscribed = useSubscription(user)
 
   
 
@@ -123,17 +124,17 @@ export const getServerSideProps = async () => {
   ])
 
   return {
-    props: {
-      netflixOriginals:     netflixOrginals.results,
-      trendingNow: trendingNow.results,
-      topRated: topRated.results,
-      actionMovies: actionMovies.results,
-      comedyMovies: comedyMovies.results,
-      horrorMovies: horrerMovies.results,
-      romanceMovies: romanceMovies.results,
-      documentaries: documentaries.results,
+    props : {
+      netflixOrginals : netflixOrginals.results,
+      trendingNow : trendingNow.results,
+      topRated : topRated.results,
+      actionMovies : actionMovies.results,
+      comedyMovies : comedyMovies.results,
+      horrerMovies : horrerMovies.results,
+      romanceMovies : romanceMovies.results,
+      documentaries : documentaries.results,
       products,
-    },
+    }
   }
 
 }
