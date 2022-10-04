@@ -3,10 +3,17 @@ import Link from 'next/link'
 import React from 'react'
 import useAuth from '../hooks/useAuth'
 import { BiCheck } from "react-icons/bi";
+import { Product } from '@stripe/firestore-stripe-payments';
+import Table from './Table';
+
+interface Props{
+    products: Product[]
+}
 
 
-function Plans() {
+function Plans({products} : Props) {
     const {logout} = useAuth()
+    const [selectedPlan, SetSelectedPlan] = React.useState<Product | null>(products[2])
   return (
     <div>
         <Head>
@@ -51,10 +58,16 @@ function Plans() {
             </ul>
             <div className='mt-4 flex flex-col space-y-4'>
                 <div className='flex w-full items-center justify-center self-end md:w-3/5'>
-                    <div className='planbox'>Standard</div>
-                    <div className='planbox'>Premium</div>
-                    <div className='planbox'>Ultra</div>
+                    {products.map(products => (
+                      <div key={products.id} className={`planbox ${selectedPlan?.id === products.id ? "opacity-100" : "opacity-60"}`}
+                        onClick={() => SetSelectedPlan(products)}
+                      >
+                        {products.name}
+                      </div> 
+                    ))}
                 </div>
+
+                <Table products={products} selectedPlan={selectedPlan} />
             </div>
 
         </main>

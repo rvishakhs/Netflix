@@ -12,6 +12,10 @@ import { modalState } from '../atom/modalatom'
 import Modal from '../components/Modal'
 import useAuth from '../hooks/useAuth';
 import Plans from '../components/Plans'
+import { getProducts, Product } from '@stripe/firestore-stripe-payments'
+import payments from '../lib/stripe'
+import { useEffect, useState } from 'react'
+import login from './login'
 
 
 
@@ -24,19 +28,38 @@ interface props {
     horrerMovies : Movie[]
     romanceMovies : Movie[]
     documentaries : Movie[]
+    products : Product[]
 }
 
-const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovies, horrerMovies, romanceMovies, documentaries}: props) => {
+const Home = ({
+    netflixOrginals,
+    trendingNow,
+    topRated,
+    actionMovies,
+    comedyMovies,
+    horrerMovies,
+    romanceMovies,
+    documentaries,
+    products,
+  }: props) => {
 
+    
+  console.log(products)  
   const modalstate = useRecoilValue(modalState)
   const subscribed = false
   const {loading} = useAuth()
 
+  
+
+
   if (loading || subscribed === null ) return null 
 
   if (!subscribed) {
-    return <Plans />
+    return  <Plans products={products}/>
   }
+
+
+  
 
   return (
     <div className="related h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
@@ -70,6 +93,15 @@ const Home = ({netflixOrginals, trendingNow, topRated, actionMovies, comedyMovie
 export default Home
 
 export const getServerSideProps = async () => {
+
+    const products = await getProducts(payments,{
+      includePrices:true,
+      activeOnly:true,
+    })
+
+    .then((res) => res)
+    .catch((err) => console.log(err.message))
+
   const [
     netflixOrginals,
     trendingNow,
@@ -91,16 +123,17 @@ export const getServerSideProps = async () => {
   ])
 
   return {
-    props : {
-      netflixOrginals : netflixOrginals.results,
-      trendingNow : trendingNow.results,
-      topRated : topRated.results,
-      actionMovies : actionMovies.results,
-      comedyMovies : comedyMovies.results,
-      horrerMovies : horrerMovies.results,
-      romanceMovies : romanceMovies.results,
-      documentaries : documentaries.results,
-    }
+    props: {
+      netflixOriginals:     netflixOrginals.results,
+      trendingNow: trendingNow.results,
+      topRated: topRated.results,
+      actionMovies: actionMovies.results,
+      comedyMovies: comedyMovies.results,
+      horrorMovies: horrerMovies.results,
+      romanceMovies: romanceMovies.results,
+      documentaries: documentaries.results,
+      products,
+    },
   }
 
 }

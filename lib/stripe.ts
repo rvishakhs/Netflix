@@ -4,9 +4,10 @@ import { createCheckoutSession } from "@stripe/firestore-stripe-payments";
 
 
 const payments = getStripePayments(app,{
-    productsCollection : 'product',
-    customersCollection: 'customer',
+    productsCollection : 'products',
+    customersCollection: 'customers',
 })
+
 
 const loadCheckout = async (priceId : string ) => {
     await createCheckoutSession(payments,{
@@ -20,3 +21,6 @@ const loadCheckout = async (priceId : string ) => {
 
 export {loadCheckout}
 export default payments 
+
+
+
