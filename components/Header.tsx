@@ -51,16 +51,16 @@ function Header() {
             <BsSearch className='text-white/80 text-2xl hover:scale-105 hover:text-white/100' />
             <p className='hidden lg:inline'>Kids</p>
             <BsBellFill className='text-white/80 text-2xl hover:scale-105 hover:text-white/100'/>
-            {/* <Link href="/account"> */}
+            <Link href ="/account">
                 <img
                     src='https://ih0.redbubble.net/image.618427277.3222/flat,1000x1000,075,f.u2.jpg'
                     alt=''
                     width={35}
                     height={35}
                     className="cursor-pointer hover:scale-105 object-contain rounded"
-                    onClick={logout}
+                    // onClick={logout}
                 />
-            {/* </Link> */}
+            </Link>
         </div>
     </header>
   )
