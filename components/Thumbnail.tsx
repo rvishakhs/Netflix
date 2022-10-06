@@ -7,7 +7,7 @@ import {
 import { Movie } from '../typing'
 import { DocumentData } from 'firebase/firestore';
 interface Props{
-    movie: Movie
+    movie: Movie | DocumentData
 }
 
 function Thumbnail({movie}: Props) {
