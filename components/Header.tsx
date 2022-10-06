@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { BsSearch, BsBellFill } from "react-icons/bs";
 import useAuth from '../hooks/useAuth';
+import Menubar from "./Menubar"
 
 function Header() {
 
@@ -38,12 +39,17 @@ function Header() {
                 src='https://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png'
                 alt=''
             />
+
+            <Menubar />
+
             <ul className='hidden md:flex items-center space-x-3 '>
                 <li className='headerlinks'>Home</li>
                 <li className='headerlinks'>Tv shows </li>
                 <li className='headerlinks'>Movies</li>
                 <li className='headerlinks'>New & Popular</li>
+                <Link href ="/mylist">
                 <li className='headerlinks'>My list</li>
+                </Link>
             </ul>
         </div>
 

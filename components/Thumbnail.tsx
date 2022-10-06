@@ -5,6 +5,7 @@ import {
   useRecoilState,
 } from 'recoil';
 import { Movie } from '../typing'
+import { DocumentData } from 'firebase/firestore';
 interface Props{
     movie: Movie
 }

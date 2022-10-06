@@ -6,13 +6,18 @@ import {
   import { modalState, movieState } from '../atom/modalatom'
 import { MdClose } from "react-icons/md";
 import { log } from 'console';
-import { Element, Genre } from '../typing';
+import { Element, Genre, Movie } from '../typing';
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { GoMute } from "react-icons/go";
 import { BsFillVolumeUpFill } from "react-icons/bs";
+import { collection, deleteDoc, doc, DocumentData, onSnapshot, setDoc } from 'firebase/firestore';
+import useAuth from '../hooks/useAuth';
+import { db } from '../firebase';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 
@@ -23,10 +28,72 @@ function Modal() {
     const [genres, setgenres] = useState<Genre[]>([])
     const [trailer, setTrailer] = useState("")
     const [muted, setMuted] = useState(false)
+    const [addedtolist, setAddedToList ] = useState(false)
+    const {user} = useAuth()
+    const [movies, setMovies] = useState<DocumentData[]| Movie[]>([])
 
     const handleclick = () => {
         setModalState(false)
     }
+
+    const toastStyle = {
+        background: 'white',
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: '16px',
+        padding: '15px',
+        borderRadius: '9999px',
+        maxWidth: '1000px',
+      }
+
+    const addedbtn = async () => {
+        if(addedtolist) {
+            await deleteDoc(
+                doc(db, "customers", user!.uid, "mylist", movie?.id.toString()!)
+            )
+            setAddedToList(!addedtolist)
+                 toast(
+            `${movie?.title || movie?.original_name} has been removed from My List`,
+            {
+            duration: 8000,
+            style: toastStyle,
+            })
+        } else {
+            await setDoc(
+                doc(db, "customers" , user!.uid, "mylist", movie?.id.toString()!),
+                {
+                    ...movie
+                }
+            )
+            setAddedToList(!addedtolist)
+            toast(
+                `${movie?.title || movie?.original_name} has been added to My List`,
+                {
+                duration: 8000,
+                style: toastStyle,
+                })
+        }
+    }
+
+    // Find all the movies in the user's list
+    useEffect(() => {
+        if (user) {
+        return onSnapshot(
+            collection(db, 'customers', user.uid, 'myList'),
+            (snapshot) => setMovies(snapshot.docs)
+        )
+        }
+    }, [db, movie?.id])
+
+    // Check if the movie is already in the user's list
+    useEffect(
+        () =>
+        setAddedToList(
+            movies.findIndex((result) => result.data().id === movie?.id) == -1
+        ),
+        [movies]
+    )
+
 
 
     useEffect(() => {
@@ -56,7 +123,6 @@ function Modal() {
       fetchMovie()
     }, [movie])
 
-    console.log(trailer);
     
     
   return (
@@ -87,13 +153,25 @@ function Modal() {
                             <FaPlay className='h-3 w-3 md:h-5 md:w-5 text-black' />
                                 Play
                         </button>
-                        <button className='modalbtn'>
-                            <AiOutlinePlus className=' h-4 w-4 md:h-6 md:w-6'/>
+                        <button 
+                            className='modalbtn'
+                            onClick={addedbtn}    
+                        >
+
+                            {addedtolist? (
+                                <MdClose className=' h-4 w-4 md:h-6 md:w-6' />
+                            ): (
+                                <AiOutlinePlus className=' h-4 w-4 md:h-6 md:w-6'/>
+                            )}    
                         </button>
+
                         <button className='modalbtn'>
                             <BsHandThumbsUp className='h-[14px] w-[14px]  md:h-6 md:w-6'/>
                         </button>
                     </div>
+
+                    <Toaster position='bottom-left'/>
+
                     <div  onClick={() => {
                         setMuted(!muted)
                     }}>
@@ -110,7 +188,7 @@ function Modal() {
                 <div className='space-y-4  text-lg'>
                     <div className="flex items-center space-x-3 text-sm ">
                         <p className='font-semibold text-green-400'>
-                            {movie!.vote_average * 10}% Match 
+                            {movie?.vote_average * 10}% Match 
                         </p>
                         <p className='font-light'>
                             {movie?.release_date || movie?.first_air_date}

@@ -6,9 +6,10 @@ import Row from '../components/Row'
 import { Movie } from '../typing'
 import requests from '../utils/requests'
 import {
+  useRecoilState,
   useRecoilValue,
 } from 'recoil';
-import { modalState } from '../atom/modalatom'
+import { modalState, movieState } from '../atom/modalatom'
 import Modal from '../components/Modal'
 import useAuth from '../hooks/useAuth';
 import Plans from '../components/Plans'
@@ -17,6 +18,7 @@ import payments from '../lib/stripe'
 import { useEffect, useState } from 'react'
 import login from './login'
 import useSubscription from '../hooks/useSubscription'
+import useList from '../hooks/useList'
 
 
 
@@ -45,10 +47,11 @@ const Home = ({
   }: props) => {
 
     
-  console.log(products)  
   const modalstate = useRecoilValue(modalState)
   const {loading, user} = useAuth()
   const subscribed = useSubscription(user)
+  const [movie, setMovie] = useRecoilState(movieState)
+  const list = useList(user?.uid)
 
   
 
@@ -81,6 +84,9 @@ const Home = ({
           <Row tittle="Scary Movies " movies={horrerMovies} />
           <Row tittle="Romantic Movies " movies={romanceMovies} />
           <Row tittle="Documentaries " movies={documentaries} />
+          {list.length > 0 && 
+            <Row tittle='My List' movies={list} />
+          }
         </section>
       </main>
       {/* Modal section */}

@@ -2,23 +2,19 @@ import React, { useRef, useState } from 'react'
 import { Movie } from '../typing'
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import Thumbnail from './Thumbnail';
+import { DocumentData } from 'firebase/firestore';
 
 interface props{
     tittle: string
-    movies: Movie[]
+    movies: Movie[] | DocumentData[]
 }
 
 function Row({tittle, movies}:props) {
 
     const [ismoved, setIsMoved] = useState(false)
-    const rowRef = useRef<HTMLDivElement>(null)
-
-    console.log(movies);
-    
+    const rowRef = useRef<HTMLDivElement>(null)    
 
     const handleClick = (direction: string) => {
-
-        console.log(direction);
         
         setIsMoved(true)
         if (rowRef.current) {
