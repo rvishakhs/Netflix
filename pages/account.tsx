@@ -7,6 +7,7 @@ import moment from 'moment';
 import { GetStaticProps } from 'next'
 import { getProducts, Product } from '@stripe/firestore-stripe-payments'
 import payments from '../lib/stripe'
+import Membership from '../components/Membership'
 
 interface Props {
     products: Product[]
@@ -55,10 +56,10 @@ function Account({products}: Props ) {
                 </div>
             </div>
 
-            {/* Membership */}
+            <Membership />
 
-            <div className='mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0'>
-                <h4>Plan details </h4>
+            <div className='mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-4 md:pb-0'>
+                <h4 className='text-lg font-semibold text-[gray]'>Plan details </h4>
                 <div>
                     {
                     products.filter(
@@ -66,11 +67,11 @@ function Account({products}: Props ) {
                     )[0]?.name
                     }
                 </div>
-                <p className='text-blue-600 hover:underline cursor-pointer md:right-1 font-medium'>Change Plan </p>
+                <p className='text-blue-600 hover:underline cursor-pointer md:right-1 md:text-right font-medium'>Change Plan </p>
 
             </div>
-            <div className='mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0'>
-                <h4>Settings</h4>
+            <div className='mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-4 md:pb-0'>
+                <h4 className='text-lg  font-semibold text-[gray]'>Settings</h4>
                 <p className='text-blue-600 hover:underline cursor-pointer md:right-1 font-medium' onClick={logout}>SignOut from all devices</p>
             </div>
 
